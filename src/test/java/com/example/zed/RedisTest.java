@@ -41,8 +41,8 @@ public class RedisTest {
     @Test
     public void testSort(){
          int[] n = {2,3,1,6,8,9,5,4};
-         int[] s = SortAlgorithm.insertSort(n);
-         for(int x:s){
+         SortAlgorithm.insertionSort(n);
+         for(int x:n){
              System.out.println(x);
          }
 
