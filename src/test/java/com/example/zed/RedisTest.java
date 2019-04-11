@@ -1,23 +1,30 @@
 package com.example.zed;
 
 import com.example.zed.algorithm.SortAlgorithm;
+import com.example.zed.lock.RedisLock;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = ZedApplication.class)
 @EnableAutoConfiguration
 public class RedisTest {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private JedisPool jedisPool;
 //    @Autowired
 //    private
 
@@ -51,6 +58,17 @@ public class RedisTest {
     public void testOptional() {
         Object o = null;
         System.out.println(Optional.ofNullable(o).map(Object::toString).orElse("kong"));
+    }
+    @Test
+    public void testRedisLock() {
+        Jedis jedis = jedisPool.getResource();
+        String userLock = "user:id:12345";
+        String threadId = "1";
+        if (RedisLock.tryGetDistributedLock(jedis, userLock, threadId, 30)) {
+            System.out.println("get lock success, thread-id:" + threadId);
+        }
+        RedisLock.releaseDistributedLock(jedis, userLock, threadId);
+        jedisPool.close();
     }
 
     public static void main(String[] agrs) {
