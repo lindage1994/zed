@@ -37,6 +37,7 @@ public class BaseController {
                 e.printStackTrace();
             }
         });
+        listenerThread.setDaemon(true); //守护线程
         listenerThread.start();
         System.out.println("调用结束");
         return "sb";

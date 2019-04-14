@@ -17,4 +17,11 @@ public class GouDanTest {
         coco.seelp(new Date().getTime());
         coco.close();
     }
+    @Test
+    public void timeTest() {
+        long nanotime = System.nanoTime();
+        System.out.println(System.currentTimeMillis());
+        System.out.println(nanotime);
+        System.out.println((int)((Math.random()*9+1)*1000));
+    }
 }
