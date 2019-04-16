@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Description: session controller
  */
 @RestController
-public class SessionController {
+public class SessionController extends ExceptionController {
     @RequestMapping("getSessionId")
     public Object getSessionId(HttpServletRequest request) {
         return "当前sessionid为：" + request.getSession().getId();

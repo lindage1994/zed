@@ -14,7 +14,7 @@ import java.util.Map;
  * @Description: http controller
  */
 @RestController
-public class HttpController {
+public class HttpController extends ExceptionController{
 
     @Autowired
     HttpService httpService;

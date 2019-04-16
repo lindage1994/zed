@@ -1,6 +1,8 @@
 package com.example.zed.controller;
 
 import com.example.zed.annotation.Action;
+import com.example.zed.error.BusinessErrorEnum;
+import com.example.zed.error.BusinessException;
 import com.example.zed.service.AsyncService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 @RestController
-public class BaseController {
+public class BaseController extends ExceptionController{
 
 
     @Autowired
@@ -23,6 +25,16 @@ public class BaseController {
     @Action("index")
     public String index(){
         return "index";
+    }
+
+    @RequestMapping("exception")
+    public Object exception() throws Exception{
+        throw new Exception();
+    }
+
+    @RequestMapping("businessException")
+    public Object businessException() throws Exception {
+        throw new BusinessException(BusinessErrorEnum.USER_STATUS_ERROR);
     }
 
     @RequestMapping("async")
