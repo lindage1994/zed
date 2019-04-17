@@ -1,5 +1,6 @@
 package com.example.zed.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
@@ -16,18 +17,19 @@ import javax.servlet.http.HttpSessionListener;
  */
 @Configuration
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 120)
+@Slf4j
 public class RedisSessionConfig {
     @Bean
     public HttpSessionListener httpSessionListener() {
         return new HttpSessionListener() {
             @Override
             public void sessionCreated(HttpSessionEvent se) {
-                System.out.println("创建的sessionId：" + se.getSession().getId());
+                log.info("创建的sessionId：" + se.getSession().getId());
             }
 
             @Override
             public void sessionDestroyed(HttpSessionEvent se) {
-                System.out.println("销毁的sessionId：" + se.getSession().getId());
+                log.info("销毁的sessionId：" + se.getSession().getId());
             }
         };
     }
@@ -37,22 +39,22 @@ public class RedisSessionConfig {
         return new HttpSessionAttributeListener() {
             @Override
             public void attributeAdded(HttpSessionBindingEvent se) {
-                System.out.println("Attribute添加.......");
-                System.out.println("Attribute Name:" + se.getName());
-                System.out.println("Attribute Value:" + se.getValue());
+                log.info("Attribute添加.......");
+                log.info("Attribute Name:" + se.getName());
+                log.info("Attribute Value:" + se.getValue());
             }
 
             @Override
             public void attributeRemoved(HttpSessionBindingEvent se) {
-                System.out.println("Attribute删除.....");
-                System.out.println("Attribute Name:" + se.getName());
+                log.info("Attribute删除.....");
+                log.info("Attribute Name:" + se.getName());
             }
 
             @Override
             public void attributeReplaced(HttpSessionBindingEvent se) {
-                System.out.println("Attribute覆盖......");
-                System.out.println("Attribute Name:" + se.getName());
-                System.out.println("Attribute Old Value:" + se.getValue());
+                log.info("Attribute覆盖......");
+                log.info("Attribute Name:" + se.getName());
+                log.info("Attribute Old Value:" + se.getValue());
             }
         };
     }

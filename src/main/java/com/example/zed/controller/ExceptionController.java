@@ -3,6 +3,7 @@ package com.example.zed.controller;
 import com.example.zed.error.BusinessErrorEnum;
 import com.example.zed.error.BusinessException;
 import com.example.zed.response.CommonResponseObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @Date: 2019/4/16 15:34
  * @Description: 统一异常处理类
  */
+@Slf4j
 public class ExceptionController {
 
     /**
@@ -25,6 +27,7 @@ public class ExceptionController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Object handlerException(Exception ex) {
+        log.error(ex.getMessage());
         CommonResponseObject responseObject;
         if (ex instanceof BusinessException) {
             BusinessException businessException = (BusinessException) ex;

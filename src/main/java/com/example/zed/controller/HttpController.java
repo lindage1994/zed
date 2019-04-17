@@ -1,6 +1,7 @@
 package com.example.zed.controller;
 
 import com.example.zed.service.HttpService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import java.util.Map;
  * @Description: http controller
  */
 @RestController
+@Slf4j(topic = "this is httpController")
 public class HttpController extends ExceptionController{
 
     @Autowired
