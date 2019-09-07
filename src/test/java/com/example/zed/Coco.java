@@ -13,7 +13,7 @@ public class Coco {
         Class coco = Coco.class;
         System.out.println(coco.getSimpleName() + "，我要同你饮酒");
     }
-    public void seelp(long time){
+    public void sleep(long time){
         System.out.println("，仲有丢嗨" + new SimpleDateFormat("HH:mm:SS").format(time));
     }
     public void close() {
