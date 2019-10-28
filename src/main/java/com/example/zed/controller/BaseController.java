@@ -1,6 +1,7 @@
 package com.example.zed.controller;
 
 import com.example.zed.annotation.Action;
+import com.example.zed.annotation.CacheLock;
 import com.example.zed.error.BusinessErrorEnum;
 import com.example.zed.error.BusinessException;
 import com.example.zed.service.AsyncService;
@@ -41,8 +42,14 @@ public class BaseController extends ExceptionController{
 
     @RequestMapping("async")
     @Action("async")
+    @CacheLock(prefix = "AAAAAA")
     public String async() {
         log.info("日志开始打印........");
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("调用开始");
         Future<String> future = asyncService.asyncPrint();
         Thread listenerThread = new Thread(() -> {

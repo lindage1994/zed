@@ -27,6 +27,7 @@ public class ExceptionController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Object handlerException(Exception ex) {
+        ex.printStackTrace();
         log.error(ex.getMessage());
         CommonResponseObject responseObject;
         if (ex instanceof BusinessException) {

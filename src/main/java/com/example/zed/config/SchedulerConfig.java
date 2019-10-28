@@ -19,12 +19,12 @@ import java.util.Properties;
 @Configuration
 public class SchedulerConfig {
 
-    @Bean(name = "SchedulerFactory")
-    public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
-        SchedulerFactoryBean factory = new SchedulerFactoryBean();
-        factory.setQuartzProperties(quartzProperties());
-        return factory;
-    }
+//    @Bean(name = "SchedulerFactory")
+//    public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
+//        SchedulerFactoryBean factory = new SchedulerFactoryBean();
+//        factory.setQuartzProperties(quartzProperties());
+//        return factory;
+//    }
 
     @Bean
     public Properties quartzProperties() throws IOException {
@@ -46,8 +46,8 @@ public class SchedulerConfig {
     /*
      * 通过SchedulerFactoryBean获取Scheduler的实例
      */
-    @Bean(name = "Scheduler")
-    public Scheduler scheduler() throws IOException {
-        return schedulerFactoryBean().getScheduler();
-    }
+//    @Bean(name = "Scheduler")
+//    public Scheduler scheduler() throws IOException {
+//        return schedulerFactoryBean().getScheduler();
+//    }
 }
